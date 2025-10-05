@@ -4,25 +4,25 @@
 
 A robust backend service that extracts, normalizes, and classifies financial amounts from medical bills and receipts using OCR, intelligent text processing, and optional LLM validation.
 
-## 🎯 Features
+## Features
 
-✅ **OCR Text Extraction** - Extract text from images using Tesseract.js  
-✅ **Multi-format Input** - Accept plain text, base64 images, or file uploads  
-✅ **Smart Normalization** - Fix common OCR errors (l→1, O→0, I→1)  
-✅ **Context Classification** - Classify amounts as total, paid, due, discount, tax  
-✅ **Provenance Tracking** - Every amount includes its source text  
-✅ **Guardrails** - Handle noisy documents gracefully  
-✅ **Comprehensive Error Handling** - Clear HTTP status codes and error messages  
-✅ **Optional LLM Validation** - Enhance accuracy with OpenAI (optional)  
+- **OCR Text Extraction** - Extract text from images using Tesseract.js  
+- **Multi-format Input** - Accept plain text, base64 images, or file uploads  
+- **Smart Normalization** - Fix common OCR errors (l→1, O→0, I→1)  
+- **Context Classification** - Classify amounts as total, paid, due, discount, tax  
+- **Provenance Tracking** - Every amount includes its source text  
+- **Guardrails** - Handle noisy documents gracefully  
+- **Comprehensive Error Handling** - Clear HTTP status codes and error messages  
+- **Optional LLM Validation** - Enhance accuracy with OpenAI (optional)  
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js v16 or higher
 - npm or yarn
 - (Optional) ngrok for public URL
 - (Optional) OpenAI API key
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone or Create Project
 
@@ -83,16 +83,16 @@ npm start
 
 You should see:
 ```
-🚀 Server is running on port 3000
-📍 Environment: development
-🔗 API Base URL: http://localhost:3000/api
-📝 Health Check: http://localhost:3000/health
+Server is running on port 3000
+Environment: development
+API Base URL: http://localhost:3000/api
+Health Check: http://localhost:3000/health
 
-✅ Server ready! Test with:
+Server ready! Test with:
    curl http://localhost:3000/health
 ```
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Base URL
 ```
@@ -250,7 +250,12 @@ curl -X POST http://localhost:3000/api/final \
 }
 ```
 
-## 🧪 Testing
+## Testing
+
+### Method 1: Automated Test Suite
+```bash
+npm test
+```
 
 ### Method 2: Manual Testing with curl
 
@@ -306,7 +311,7 @@ curl -X POST http://localhost:3000/api/final \
 
 Install the "REST Client" extension and open `tests/sample-requests.http`, then click "Send Request" above each test.
 
-## 📹 Screen Recording Guide
+## Screen Recording Guide
 
 For submission, record a **60-90 second video** showing:
 
@@ -369,7 +374,7 @@ For submission, record a **60-90 second video** showing:
 - Pipe output through `jq` for prettier JSON: `curl ... | jq`
 - Highlight key features in responses (OCR corrections, classifications)
 
-## 🌐 Expose Publicly with ngrok
+## Expose Publicly with ngrok
 
 ```bash
 # Install ngrok globally
@@ -393,7 +398,7 @@ curl -X POST https://abc123.ngrok.io/api/final \
   -d '{"text":"Total: Rs 1200"}'
 ```
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 ai-amount-detection-backend/
@@ -424,7 +429,7 @@ ai-amount-detection-backend/
 └── README.md                      # This file
 ```
 
-## 🔧 Configuration
+## Configuration
 
 All configuration is in `.env`:
 
@@ -454,7 +459,7 @@ ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
 LOG_LEVEL=info  # error, warn, info, debug
 ```
 
-## 💡 Key Implementation Details
+## Key Implementation Details
 
 ### 1. OCR Error Correction
 Common OCR mistakes are automatically fixed:
@@ -493,7 +498,7 @@ Returns structured error responses for:
 - Normalization failures
 - Invalid input formats
 
-## 🛡️ Error Handling
+## Error Handling
 
 All errors return appropriate HTTP status codes:
 
@@ -516,7 +521,7 @@ All errors return appropriate HTTP status codes:
 }
 ```
 
-## 📊 Response Schemas
+## Response Schemas
 
 ### Success Response (`/api/final`)
 ```json
@@ -550,7 +555,7 @@ All errors return appropriate HTTP status codes:
 }
 ```
 
-## 🎓 Sample Test Cases
+## Sample Test Cases
 
 ### Test Case 1: Perfect Bill
 **Input:**
@@ -590,7 +595,7 @@ This document has no numbers
 ```
 **Expected:** `status: "no_amounts_found"`
 
-## 🔍 Troubleshooting
+## Troubleshooting
 
 ### Issue: "Cannot find module"
 **Solution:**
@@ -631,7 +636,7 @@ wget https://github.com/naptha/tessdata/raw/gh-pages/4.0.0/eng.traineddata
 - Avoid blurry/skewed images
 - Consider using Google Vision or AWS Textract for production
 
-## 🚀 Deployment Options
+## Deployment Options
 
 ### 1. Local with PM2
 ```bash
@@ -664,31 +669,31 @@ docker run -p 3000:3000 -e PORT=3000 amount-detection
 - **Render**: Deploy from GitHub
 - **AWS EC2**: Upload and run with PM2
 
-## 📝 About OpenAI Integration
+## About OpenAI Integration
 
 The OpenAI integration is **OPTIONAL** and **NOT required** for the project to work perfectly.
 
 **Without OpenAI:**
-- ✅ All features work perfectly
-- ✅ High accuracy with rule-based classification
-- ✅ No API costs
+- All features work perfectly
+- High accuracy with rule-based classification
+- No API costs
 
 **With OpenAI:**
-- ✅ Additional validation layer
-- ✅ Potential accuracy improvements
-- ❌ Requires paid API key ($5 minimum)
-- ❌ Slower responses
+- Additional validation layer
+- Potential accuracy improvements
+- Requires paid API key ($5 minimum)
+- Slower responses
 
 **Recommendation**: Skip OpenAI for testing and submission. The system is production-ready without it.
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 - **Text Processing**: 100-300ms
 - **Image OCR**: 2-5 seconds
 - **Memory Usage**: ~150MB
 - **Concurrent Requests**: 100+ (with clustering)
 
-## ✅ Evaluation Checklist
+## Evaluation Checklist
 
 - [x] **Correctness**: All JSON schemas match problem statement exactly
 - [x] **Text & Image Handling**: Accepts both formats with proper OCR
@@ -699,11 +704,11 @@ The OpenAI integration is **OPTIONAL** and **NOT required** for the project to w
 - [x] **AI Chaining**: OCR → Normalize → Classify pipeline
 - [x] **Validation**: Input validation, amount validation, logical checks
 
-## 📄 License
+## License
 
 MIT License - Feel free to use for learning and projects.
 
-## 🤝 Support
+## Support
 
 For issues:
 1. Check server logs
@@ -711,24 +716,17 @@ For issues:
 3. Test with provided curl examples
 4. Check GitHub Issues (if applicable)
 
-## 🎯 Next Steps
+## Next Steps
 
 After running locally:
-1. ✅ Test all endpoints with curl
-2. ✅ Run automated test suite: `npm test`
-3. ✅ Record screen demonstration
-4. ✅ Push to GitHub
-5. ✅ Deploy with ngrok or cloud platform
-6. ✅ Submit with video and repository link
+1. Test all endpoints with curl
+2. Run automated test suite: `npm test`
+3. Record screen demonstration
+4. Push to GitHub
+5. Deploy with ngrok or cloud platform
+6. Submit with video and repository link
 
 ---
 
-**Built with ❤️ for medical document processing**1: Automated Test Suite
-```bash
-npm test
-```
-
-This runs comprehensive tests covering all endpoints and edge cases.
-
-### Method#   A m o u n t - D e t e c t i o n - i n - M e d i c a l - D o c u m e n t s  
+**Built with dedication for medical document processing**
  
